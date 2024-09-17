@@ -47,6 +47,17 @@ class evoting{
         }
 
     }
+
+    public function getVoterDetails(){
+
+        $query = "select *from candidates";
+        $stmt = $this->conn->prepare($query);
+        if($stmt->execute()){
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+    }
     public function checkLogin($email , $password){
 
         $query = "select *from users where email =:email AND password =:password" ;

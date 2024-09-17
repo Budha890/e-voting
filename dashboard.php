@@ -1,3 +1,16 @@
+<?php 
+
+session_start();
+require 'function.php';
+
+if(!isLoggedIn()['role']=='admin'){
+   header('location:index.php');
+   
+   die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +45,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-          
+
         }
 
         /* Add some padding to the form */
@@ -55,7 +68,10 @@
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename"><span style="color:purple;"> Online</span> <span style="color:red; font-weight:600;"> Voting<span> </h1>
+                
+
             </a>
+            <h1 class="card-title"><span style="color: purple; float: right;margin-right: 62px; font-size: medium;"> Hi ,<?php echo isLoggedIn()['fname']; ?></span>  </h1>
 
             <nav id="navmenu" class="navmenu">
                 <ul>
@@ -80,7 +96,7 @@
                             <li><a href="#">Dropdown 4</a></li>
                         </ul>
                     </li>
-                    <li><a href="register.php">Register</a></li>
+                    <li><a href="Logout.php">Logout</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -93,35 +109,48 @@
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
-        <div class="container form-container">
-        <div class="col-sm-6">
-            <legend  style="color: green; font-size: 12px !important;"><?php  if(isset($_GET['alert'])){ echo $_GET['alert']; }?></legend>
-            <h2 class="text-center">Upload Candidate Details :  </h2>
-            <form action="action.php?form=login" method="POST">
-           
-        
-            
-            <div class="form-group">
-                    <label for="email">Candidate Name:</label>
-                    <input type="text" class="form-control" id="email" name="cname" aria-describedby="emailHelp" required>
-                    <small id="emailHelp" class="form-text text-muted"></small>
+            <div class="container form-container">
+                <div class="col-sm-6">
+                    <legend style="color: green; font-size: 12px !important;"><?php if (isset($_GET['alert'])) {
+                                                                                    echo $_GET['alert'];
+                                                                                } ?></legend>
+                    <h2 class="text-center">Upload Candidate Details : </h2>
+                    <form action="action.php?form=candidateForm" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="cname">Candidate Name:</label>
+                            <input type="text" class="form-control" id="cname" name="cname" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pname">Political Party Name:</label>
+                            <select class="form-control" name="pname">
+                                <option value="NC">NC</option>
+                                <option value="CP">CP</option>
+                                <option value="AP">AP</option>
+                                <option value="DP">DP</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact">Contact:</label>
+                            <input type="text" class="form-control" id="contact" name="contact" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cimg">Image:</label>
+                            <input type="file" class="form-control" id="cimg" name="cimg" required>
+                        </div>
+
+                        <input type="submit" class="btn btn-primary btn-block" value="Create" name="btn_create_candidate" style="margin-top:12px;">
+                    </form>
+
                 </div>
-
-                
-                <div class="form-group">
-                    <label for="password">Political Party Name :</label>
-                    <input type="text " class="form-control" id="password" name="text" required>
-                </div>
-
-                
-
-               
-             
-
-                <input type="submit" class=" col-sm-2 btn btn-primary btn-block"style="margin-top:12px;" value="create " name="btn_create_candidate">
-            </form>
-        </div>
-    </div>
+            </div>
 
         </section><!-- /Portfolio Section -->
 

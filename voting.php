@@ -1,3 +1,11 @@
+<?php 
+require_once("evoting.php");
+$getCandidates = new evoting($connection);
+
+$getAll = $getCandidates->getVoterDetails();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,11 +102,59 @@
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
         <div class="container form-container">
-        <div class="col-sm-6">
+        <div class="row" style="  overflow-y: scroll;">
+        <div class="col-sm-8 offset-2">
             <legend  style="color: green; font-size: 12px !important;"><?php  if(isset($_GET['alert'])){ echo $_GET['alert']; }?></legend>
-            <h2 class="text-center">Vote For Right Person </h2>
+            <h2 class="text-center" style="color: green;">Vote For Right Person </h2>
       
         </div>
+        <div class="row">
+        <div class="card mb-3">
+
+  <?php
+foreach ($getAll as $key => $value){?>
+
+<div class="row">
+    <div class="col-md-3" style="margin-top: 25px;">
+      <img src="<?php echo $value['img_url'];?>" class="img-fluid"  width='200' height='200' style="border-radius:52px">
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+        <h5 class="card-title">Name : <?php  echo $value['name'];?></h5>
+        <p class="card-text">Political Party : <?php  echo $value['party'];?></p>
+        <p class="card-text">Address : <?php  echo $value['Address'];?></p>
+        <p class="card-text"><small class="btn btn-success">Vote </small></p>
+      </div>
+    </div>
+    <div class="col-md-2" style="margin-top: 25px;" >
+   
+      
+      <?php  if($value['party'] == 'NC'){ ?> 
+        <img src="assets/img/hand.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
+        <?php }?>
+        <?php  if($value['party'] == 'CP'){ ?> 
+        <img src="assets/img/light.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
+        <?php }?>
+        <?php  if($value['party'] == 'AP'){ ?> 
+        <img src="assets/img/elep.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
+        <?php }?>
+        <?php  if($value['party'] == 'DP'){ ?> 
+        <img src="assets/img/elep.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
+        <?php }?>
+      
+      
+     
+    </div>
+  </div>
+  <hr>
+
+<?php }?>
+  
+</div>
+        </div>
+        </div>
+
+        
     </div>
 
         </section><!-- /Portfolio Section -->
