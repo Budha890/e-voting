@@ -49,7 +49,7 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid  position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename"><span style="color:green;"> online</span> <span style="color:purple; font-weight:600;"> voting System<span> </h1>
@@ -58,9 +58,6 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="index.php" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
                     <li><a href="login.php">Login</a></li>
                 
                 </ul>

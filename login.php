@@ -51,7 +51,7 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid  position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename"><span style="color:purple;"> Online</span> <span style="color:red; font-weight:600;"> Voting<span> </h1>
@@ -60,22 +60,7 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="index.php" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                        
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                          
-                        </ul>
-                    </li>
+    
                     <li><a href="register.php">Register</a></li>
                  
                 </ul>

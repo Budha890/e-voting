@@ -136,9 +136,6 @@ if(!isLoggedIn()['role']=='admin'){
             </div>
 
         </section><!-- /Portfolio Section -->
-
-
-
     </main>
 
     <footer id="footer" class="footer light-background">
@@ -153,9 +150,7 @@ if(!isLoggedIn()['role']=='admin'){
                 <a href=""><i class="bi bi-instagram"></i></a>
                 <a href=""><i class="bi bi-linkedin"></i></a>
             </div>
-            
-
-    </footer>
+             </footer>
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

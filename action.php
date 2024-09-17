@@ -101,8 +101,35 @@ if (isset($_POST['btn_create_candidate'])) {
         echo "Image upload error.";
     }
 }
-?>
-.
+
+
+
+if ($_GET['form'] == 'voting_form' ) {
+
+    $userid = $_POST['userid'];
+    $cid = $_POST['cid'];
+    if(empty($register->checkVoter($userid))){
+
+      if($register->voting_start($userid,$cid)){
+
+      
+        header('location:voting.php');
+        die();
+      }
+
+    }else{
+
+        header('location:voting.php?alert=Already_exist_vote');
+    }
+
+
+    
+} else {
+    echo 'Invalid CSRF token';
+}
 
 
 ?>
+
+
+

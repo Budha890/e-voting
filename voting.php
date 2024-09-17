@@ -1,14 +1,22 @@
-<?php 
+<?php
 session_start();
 require 'function.php';
-if(!isLoggedIn()['role']=='voter' ){
-   header('location:login.php');
-   die();
-}
 require_once("evoting.php");
+if (!isLoggedIn()['role'] == 'voter') {
+    header('location:login.php');
+    die();
+}
+
+$userid = $_SESSION['userid'];
+$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+
+
 $getCandidates = new evoting($connection);
 
 $getAll = $getCandidates->getVoterDetails();
+
+$validateVoter = $getCandidates->checkVoter($userid);
 
 ?>
 
@@ -46,7 +54,7 @@ $getAll = $getCandidates->getVoterDetails();
             display: flex;
             justify-content: center;
             align-items: center;
-          
+
         }
 
         /* Add some padding to the form */
@@ -65,21 +73,20 @@ $getAll = $getCandidates->getVoterDetails();
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid  position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename"><span style="color:purple;"> Online</span> <span style="color:red; font-weight:600;"> Voting<span> </h1>
             </a>
-            <h1 class="card-title"><span style="color: purple; float: right;margin-right: 62px; font-size: medium;"> Hi ,<?php echo isLoggedIn()['fname']; ?></span>  </h1>
+            <h1 class="card-title"><span style="color: purple; float: right;margin-right: 62px; font-size: medium;"> Hi ,<?php echo isLoggedIn()['fname']; ?></span> </h1>
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                        </ul>
+                    <li><a href="index.php" class="active">Home</a></li>
+    
                     </li>
                     <li><a href="logout.php">Logout</a></li>
-                   
+
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -91,60 +98,83 @@ $getAll = $getCandidates->getVoterDetails();
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
-        <div class="container form-container">
-        <div class="row" style="  overflow-y: scroll;">
-        <div class="col-sm-8 offset-2">
-        <h2 class="text-center" style="color: green;">Vote For Right Person </h2>
-      
-        </div>
-        <div class="row">
-        <div class="card mb-3">
+            <div class="container form-container">
+                <div class="row" style="  overflow-y: scroll;">
+                    <div class="col-sm-8 offset-2">
+                        <h2 class="text-center" style="color: green;">Vote For Right Person </h2>
 
-  <?php
-foreach ($getAll as $key => $value){?>
+                    </div>
 
-<div class="row">
-    <div class="col-md-3" style="margin-top: 25px;">
-      <img src="<?php echo $value['img_url'];?>" class="img-fluid"  width='200' height='200' style="border-radius:52px">
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-        <h5 class="card-title">Name : <?php  echo $value['name'];?></h5>
-        <p class="card-text">Political Party : <?php  echo $value['party'];?></p>
-        <p class="card-text">Address : <?php  echo $value['Address'];?></p>
-        <p class="card-text"><small class="btn btn-success">Vote </small></p>
-      </div>
-    </div>
-    <div class="col-md-2" style="margin-top: 25px;" >
-   
-      
-      <?php  if($value['party'] == 'NC'){ ?> 
-        <img src="assets/img/hand.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
-        <?php }?>
-        <?php  if($value['party'] == 'CP'){ ?> 
-        <img src="assets/img/light.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
-        <?php }?>
-        <?php  if($value['party'] == 'AP'){ ?> 
-        <img src="assets/img/elep.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
-        <?php }?>
-        <?php  if($value['party'] == 'DP'){ ?> 
-        <img src="assets/img/elep.png" class="img-fluid"  width='200' height='200' style="border-radius:52px">
-        <?php }?>
-      
-      
-     
-    </div>
-  </div>
-  <hr>
+                    <?php
+                    if (empty($validateVoter)) { ?>
 
-<?php }?>
-  
-</div>
-        </div>
-        </div>
 
-        
-    </div>
+                        <div class="row">
+                            <div class="card mb-3">
+
+                                <?php
+                                foreach ($getAll as $key => $value) { ?>
+
+                                    <div class="row">
+                                        <div class="col-md-3" style="margin-top: 25px;">
+                                            <img src="<?php echo $value['img_url']; ?>" class="img-fluid" width='200' height='200' style="border-radius:52px">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Name : <?php echo $value['name']; ?></h5>
+                                                <p class="card-text">Political Party : <?php echo $value['party']; ?></p>
+                                                <p class="card-text">Address : <?php echo $value['Address']; ?></p>
+                                                <form method="POST" action="action.php?form=voting_form">
+                                                    <input type="number" name="userid" value="<?php echo $userid; ?>" hidden>
+                                                    <input type="number" name="cid" value="<?php echo $value['id']; ?>" hidden>
+                                                    <button type="submit" name="vote_btn" class="btn btn-success">Vote</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="margin-top: 25px;">
+
+
+                                            <?php if ($value['party'] == 'NC') { ?>
+                                                <img src="assets/img/hand.png" class="img-fluid" width='200' height='200' style="border-radius:52px">
+                                            <?php } ?>
+                                            <?php if ($value['party'] == 'CP') { ?>
+                                                <img src="assets/img/light.png" class="img-fluid" width='200' height='200' style="border-radius:52px">
+                                            <?php } ?>
+                                            <?php if ($value['party'] == 'AP') { ?>
+                                                <img src="assets/img/elep.png" class="img-fluid" width='200' height='200' style="border-radius:52px">
+                                            <?php } ?>
+                                            <?php if ($value['party'] == 'DP') { ?>
+                                                <img src="assets/img/elep.png" class="img-fluid" width='200' height='200' style="border-radius:52px">
+                                            <?php } ?>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                <?php } ?>
+
+                            </div>
+                        </div>
+
+
+                    <?php } else { ?>
+                        <div class="row">
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Well done! </h4>
+                                <p>Aww yeah, your Vote is  successfully Recorded</p>
+                                <hr>
+                                <p class="mb-0">Thank You</p>
+                            </div>
+
+
+
+                        </div>
+
+                    <?php } ?>
+                </div>
+
+
+            </div>
 
         </section><!-- /Portfolio Section -->
 
