@@ -62,7 +62,7 @@
                     <li><a href="services.html">Services</a></li>
                     <li><a href="portfolio.html">Portfolio</a></li>
                     <li><a href="login.php">Login</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -122,7 +122,7 @@
 
         <div class="container">
             <div class="copyright text-center ">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">Room Finder</strong> <span>All Rights Reserved</span></p>
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">Online voting</strong> <span>All Rights Reserved</span></p>
             </div>
             <div class="social-links d-flex justify-content-center">
                 <a href=""><i class="bi bi-twitter-x"></i></a>

@@ -1,4 +1,10 @@
 <?php 
+session_start();
+require 'function.php';
+if(!isLoggedIn()['role']=='voter' ){
+   header('location:login.php');
+   die();
+}
 require_once("evoting.php");
 $getCandidates = new evoting($connection);
 
@@ -64,32 +70,16 @@ $getAll = $getCandidates->getVoterDetails();
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename"><span style="color:purple;"> Online</span> <span style="color:red; font-weight:600;"> Voting<span> </h1>
             </a>
+            <h1 class="card-title"><span style="color: purple; float: right;margin-right: 62px; font-size: medium;"> Hi ,<?php echo isLoggedIn()['fname']; ?></span>  </h1>
 
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
                         </ul>
                     </li>
-                    <li><a href="register.php">Register</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                   
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -104,8 +94,7 @@ $getAll = $getCandidates->getVoterDetails();
         <div class="container form-container">
         <div class="row" style="  overflow-y: scroll;">
         <div class="col-sm-8 offset-2">
-            <legend  style="color: green; font-size: 12px !important;"><?php  if(isset($_GET['alert'])){ echo $_GET['alert']; }?></legend>
-            <h2 class="text-center" style="color: green;">Vote For Right Person </h2>
+        <h2 class="text-center" style="color: green;">Vote For Right Person </h2>
       
         </div>
         <div class="row">
@@ -167,7 +156,7 @@ foreach ($getAll as $key => $value){?>
 
         <div class="container">
             <div class="copyright text-center ">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">Room Finder</strong> <span>All Rights Reserved</span></p>
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">Online voting</strong> <span>All Rights Reserved</span></p>
             </div>
             <div class="social-links d-flex justify-content-center">
                 <a href=""><i class="bi bi-twitter-x"></i></a>

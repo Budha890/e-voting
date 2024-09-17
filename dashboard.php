@@ -77,27 +77,10 @@ if(!isLoggedIn()['role']=='admin'){
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
+                   
+            
                     <li><a href="Logout.php">Logout</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -162,7 +145,7 @@ if(!isLoggedIn()['role']=='admin'){
 
         <div class="container">
             <div class="copyright text-center ">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">Room Finder</strong> <span>All Rights Reserved</span></p>
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">Online voting</strong> <span>All Rights Reserved</span></p>
             </div>
             <div class="social-links d-flex justify-content-center">
                 <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -170,11 +153,7 @@ if(!isLoggedIn()['role']=='admin'){
                 <a href=""><i class="bi bi-instagram"></i></a>
                 <a href=""><i class="bi bi-linkedin"></i></a>
             </div>
-            <div class="credits">
-
-                Designed by <a href="#">DMC BCA</a>
-            </div>
-        </div>
+            
 
     </footer>
 
