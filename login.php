@@ -113,7 +113,7 @@
 
         <div class="container">
             <div class="copyright text-center ">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">Room Finder</strong> <span>All Rights Reserved</span></p>
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">online Voting</strong> <span>All Rights Reserved</span></p>
             </div>
             <div class="social-links d-flex justify-content-center">
                 <a href=""><i class="bi bi-twitter-x"></i></a>

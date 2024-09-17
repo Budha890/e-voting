@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once("evoting.php");
 $getVoteCount = new evoting($connection);
 
@@ -27,14 +29,14 @@ $getVoteCount = new evoting($connection);
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">                                                                                                                                                                     
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
 
 
 
 
 
-  
+
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
@@ -57,12 +59,15 @@ $getVoteCount = new evoting($connection);
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="index.php" class="active">Home</a></li>
-        
-          
-       
-     
-          <li><a href="login.php">Login</a></li>
-          <li><a href="register.php">Register</a></li>
+
+
+
+          <?php if (isset($_SESSION['userid'])) { ?>
+            <li><a href="logout.php">Logout</a></li> <?php } else { ?>
+            <li><a href="register.php">Register</a></li>
+          <?php } ?>
+
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -72,26 +77,26 @@ $getVoteCount = new evoting($connection);
 
   <main class="main">
 
- 
+
     <section id="portfolio" class="portfolio section">
 
       <div class="container">
 
         <div class="isotope-layout" data-default-filter=".main" data-layout="masonry" data-sort="original-order">
 
-          
+
 
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200" style="position: relative; height: 1344px;">
 
             <div class="col-lg-8 offset-2 portfolio-item isotope-item main" style="position: absolute; left: 0px; top: 0px;">
-               
+
 
               <legend style=" color:green; text-align: center;">Live Vote Count Result </legend> <span style="color: blue;"> Location : Dipayal-Silgahdi</span>
               <hr>
               <table class="table  table-striped table-light caption-top">
                 <thead>
-                  <caption>List of Candidate : <span style="color: green; float:right;"> Total Vote Count : <?php echo $getVoteCount->totalVoteCount()[0]['TotalVotes'];?> </span></caption>
+                  <caption>List of Candidate : <span style="color: green; float:right;"> Total Vote Count : <?php echo $getVoteCount->totalVoteCount()[0]['TotalVotes']; ?> </span></caption>
                   <tr>
                     <th scope="col">SN</th>
                     <th scope="col">CandidateName</th>
@@ -101,27 +106,28 @@ $getVoteCount = new evoting($connection);
                 </thead>
                 <tbody>
 
-                <?php $i = 1; foreach( $getVoteCount->VoteCountDetails() as $k => $v) {?> 
-                  <tr>
-                    <td><?php  echo $i++ ?></td>
-                    <td><?php  echo $v['CandidateName']; ?></td>
-                    <td><?php  echo $v['Party']; ?></td>
-                    <td><?php  echo $v['Vote']; ?></td>
-                  </tr>
-                  
-                  <?php }?>
-            
-                
+                  <?php $i = 1;
+                  foreach ($getVoteCount->VoteCountDetails() as $k => $v) { ?>
+                    <tr>
+                      <td><?php echo $i++ ?></td>
+                      <td><?php echo $v['CandidateName']; ?></td>
+                      <td><?php echo $v['Party']; ?></td>
+                      <td><?php echo $v['Vote']; ?></td>
+                    </tr>
+
+                  <?php } ?>
+
+
                 </tbody>
               </table>
             </div>
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app" style="position: absolute; left: 0px; top: 0px;">
-              <div class="portfolio-content h-100"style="text-align: center;">
+              <div class="portfolio-content h-100" style="text-align: center;">
                 <img src="assets/img/portfolio/app-3.jpg" class="img-fluid" width="200" height="200" style="border-radius: 78px;">
                 <div class="portfolio-custom" style="padding: 20px;">
                   <h4>John MArk</h4>
                   <p>USA , LA ,10010</p>
-  
+
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -133,7 +139,7 @@ $getVoteCount = new evoting($connection);
 
     </section><!-- /Portfolio Section -->
 
-   
+
 
 
 
@@ -152,7 +158,7 @@ $getVoteCount = new evoting($connection);
         <a href=""><i class="bi bi-linkedin"></i></a>
       </div>
       <div class="credits">
-  
+
         Designed by <a href="#">DMC BCA</a>
       </div>
     </div>
